@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package authentication.service.v0;
+
+option go_package= "/apu/auth";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+
+
+message LoginMessage {
+    string username =1 [(google.api.field_behavior) = REQUIRED];
+    string password =2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message LoginResponseMessage {
+    string accessToken = 1 ;
+}
+
+message ExtensionAccessToken {
+    string oldAccessToken = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ReplyExtensionAccessToken {
+    string newAccessToken = 1;
+}
+
+service AuthService {
+    rpc Login(LoginMessage) returns (LoginResponseMessage){
+        option (google.api.http) = {
+            post: "/login"
+            body: "*"
+          };
+    }
+
+    rpc ExtensionToken(ExtensionAccessToken) returns (ReplyExtensionAccessToken){
+        option (google.api.http) = {
+            post: "/extension-token"
+            body: "*"
+          };
+    }
+}
