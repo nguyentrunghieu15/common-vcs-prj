@@ -36,7 +36,7 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 
 func (c *authServiceClient) Login(ctx context.Context, in *LoginMessage, opts ...grpc.CallOption) (*LoginResponseMessage, error) {
 	out := new(LoginResponseMessage)
-	err := c.cc.Invoke(ctx, "/authentication.service.v0.AuthService/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.AuthService/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (c *authServiceClient) Login(ctx context.Context, in *LoginMessage, opts ..
 
 func (c *authServiceClient) ExtensionToken(ctx context.Context, in *ExtensionAccessToken, opts ...grpc.CallOption) (*ReplyExtensionAccessToken, error) {
 	out := new(ReplyExtensionAccessToken)
-	err := c.cc.Invoke(ctx, "/authentication.service.v0.AuthService/ExtensionToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/auth.AuthService/ExtensionToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func _AuthService_Login_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/authentication.service.v0.AuthService/Login",
+		FullMethod: "/auth.AuthService/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).Login(ctx, req.(*LoginMessage))
@@ -112,7 +112,7 @@ func _AuthService_ExtensionToken_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/authentication.service.v0.AuthService/ExtensionToken",
+		FullMethod: "/auth.AuthService/ExtensionToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).ExtensionToken(ctx, req.(*ExtensionAccessToken))
@@ -124,7 +124,7 @@ func _AuthService_ExtensionToken_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "authentication.service.v0.AuthService",
+	ServiceName: "auth.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

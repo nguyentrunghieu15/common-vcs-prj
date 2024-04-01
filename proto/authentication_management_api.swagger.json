@@ -23,7 +23,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v0ReplyExtensionAccessToken"
+              "$ref": "#/definitions/authReplyExtensionAccessToken"
             }
           },
           "default": {
@@ -39,7 +39,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v0ExtensionAccessToken"
+              "$ref": "#/definitions/authExtensionAccessToken"
             }
           }
         ],
@@ -55,7 +55,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v0LoginResponseMessage"
+              "$ref": "#/definitions/authLoginResponseMessage"
             }
           },
           "default": {
@@ -71,7 +71,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v0LoginMessage"
+              "$ref": "#/definitions/authLoginMessage"
             }
           }
         ],
@@ -82,6 +82,48 @@
     }
   },
   "definitions": {
+    "authExtensionAccessToken": {
+      "type": "object",
+      "properties": {
+        "oldAccessToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "oldAccessToken"
+      ]
+    },
+    "authLoginMessage": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    },
+    "authLoginResponseMessage": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        }
+      }
+    },
+    "authReplyExtensionAccessToken": {
+      "type": "object",
+      "properties": {
+        "newAccessToken": {
+          "type": "string"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -107,48 +149,6 @@
             "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
-        }
-      }
-    },
-    "v0ExtensionAccessToken": {
-      "type": "object",
-      "properties": {
-        "oldAccessToken": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "oldAccessToken"
-      ]
-    },
-    "v0LoginMessage": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ]
-    },
-    "v0LoginResponseMessage": {
-      "type": "object",
-      "properties": {
-        "accessToken": {
-          "type": "string"
-        }
-      }
-    },
-    "v0ReplyExtensionAccessToken": {
-      "type": "object",
-      "properties": {
-        "newAccessToken": {
-          "type": "string"
         }
       }
     }
