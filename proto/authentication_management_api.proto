@@ -25,6 +25,17 @@ message ReplyExtensionAccessToken {
     string newAccessToken = 1;
 }
 
+
+message SignUpRequest {
+    string fullName =1;
+    string email = 2;
+    string password = 3;
+}
+
+message SignUpResponse {
+    string message = 1;
+}
+
 service AuthService {
     rpc Login(LoginMessage) returns (LoginResponseMessage){
         option (google.api.http) = {
@@ -39,4 +50,11 @@ service AuthService {
             body: "*"
           };
     }
+
+    rpc SignUp (SignUpRequest) returns (SignUpResponse){
+        option (google.api.http) = {
+            post: "/signup"
+            body: "*"
+          };
+    };
 }
